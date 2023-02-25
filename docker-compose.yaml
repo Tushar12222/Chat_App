@@ -1,0 +1,28 @@
+services:
+  frontend:
+    build: .
+    ports:
+      - 3000:3000
+    networks:
+      - my-network-chat-app
+  
+  pocketbase:
+    container_name: pocketbase-chat-app
+    
+    image: ghcr.io/muchobien/pocketbase:latest
+    volumes:
+      - pocketbase-volume-chat-app:/app/pocketbase/pb_data
+    networks:
+      - my-network-chat-app
+    ports:
+      - 8090:8090
+
+networks:
+  my-network-chat-app:
+    
+    name: my-network-chat-app
+
+volumes:
+  pocketbase-volume-chat-app:
+    name: pocketbase-volume-chat-app
+      
